@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFG — Elite Membership | The Legacy Architect™</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0F1E3C;
+    --navy-mid:   #1B3160;
+    --blue:       #2563EB;
+    --blue-dark:  #1D4ED8;
+    --blue-light: #EFF4FF;
+    --blue-pill:  #DBEAFE;
+    --blue-pill-text: #1E40AF;
+    --white:      #FFFFFF;
+    --off-white:  #F7F9FC;
+    --gray-light: #F0F4F9;
+    --gray-mid:   #E2E8F0;
+    --gray-text:  #64748B;
+    --dark-text:  #0F172A;
+    --body-text:  #334155;
+    --success:    #22C55E;
+    --danger:     #EF4444;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--white);
+    color: var(--body-text);
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy);
+    padding: 0 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .nav-logo-box { background: var(--blue); color: white; font-weight: 800; font-size: 0.75rem; padding: 4px 8px; letter-spacing: 0.05em; }
+  .nav-logo-text { color: white; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.8rem; font-weight: 400; transition: color 0.2s; }
+  .nav-links a:hover { color: white; }
+  .nav-actions { display: flex; align-items: center; gap: 10px; }
+  .btn-nav-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 7px 18px; font-family: inherit; font-size: 0.78rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .btn-nav-ghost:hover { border-color: white; }
+  .btn-nav-solid { background: var(--blue); border: none; color: white; padding: 7px 18px; font-family: inherit; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+  .btn-nav-solid:hover { background: var(--blue-dark); }
+
+  /* HERO */
+  .hero { background: var(--navy); padding: 80px 60px 90px; position: relative; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; right: -80px; top: -80px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 70%); pointer-events: none; }
+  .hero-inner { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 1fr 400px; gap: 80px; align-items: center; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(37,99,235,0.25); border: 1px solid rgba(37,99,235,0.5); color: #93C5FD; padding: 5px 14px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 24px; }
+  .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #60A5FA; }
+  .hero h1 { font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 800; color: white; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .hero h1 .accent { color: #60A5FA; }
+  .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.65); font-weight: 400; margin-bottom: 36px; max-width: 520px; line-height: 1.75; }
+  .hero-cta-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .btn-primary { background: var(--blue); color: white; border: none; padding: 13px 32px; font-family: inherit; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.2s; letter-spacing: 0.01em; }
+  .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(37,99,235,0.35); }
+  .btn-outline { background: transparent; color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.25); padding: 13px 28px; font-family: inherit; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+  .btn-outline:hover { border-color: white; color: white; }
+  .hero-trust { margin-top: 40px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .hero-trust-item { color: rgba(255,255,255,0.4); font-size: 0.75rem; display: flex; align-items: center; gap: 6px; }
+  .hero-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 36px 32px; }
+  .hero-card-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #60A5FA; margin-bottom: 24px; }
+  .hero-stat { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .hero-stat:last-child { border-bottom: none; }
+  .hero-stat-num { font-size: 1.9rem; font-weight: 800; color: white; line-height: 1; margin-bottom: 4px; }
+  .hero-stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
+
+  /* SECTION BASE */
+  .section { padding: 88px 60px; }
+  .section-inner { max-width: 1140px; margin: 0 auto; }
+  .section-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+  h2.section-title { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; color: var(--dark-text); line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 16px; }
+  h2.section-title .accent { color: var(--blue); }
+  .section-desc { font-size: 1rem; color: var(--gray-text); max-width: 580px; line-height: 1.75; }
+
+  /* WHY */
+  .why { background: var(--white); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; margin-top: 56px; }
+  .why-img-placeholder { aspect-ratio: 4/3; background: linear-gradient(135deg, #1B3160 0%, #0F1E3C 100%); display: flex; align-items: center; justify-content: center; }
+  .why-img-placeholder span { color: rgba(255,255,255,0.15); font-size: 4rem; }
+  .why-q-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-text); margin-bottom: 14px; margin-top: 32px; }
+  .why-q-list { list-style: none; }
+  .why-q-list li { padding: 13px 0; border-bottom: 1px solid var(--gray-mid); font-size: 0.92rem; color: var(--body-text); display: flex; gap: 10px; align-items: center; }
+  .why-q-list li:first-child { border-top: 1px solid var(--gray-mid); }
+  .why-q-list li::before { content: '→'; color: var(--blue); font-weight: 700; flex-shrink: 0; }
+  .why-answer { margin-top: 28px; padding: 22px 26px; background: var(--blue-light); border-left: 3px solid var(--blue); }
+  .why-answer p { font-size: 0.9rem; color: var(--navy); line-height: 1.8; }
+  .why-answer strong { font-weight: 700; }
+  .btn-blue { display: inline-block; margin-top: 24px; background: var(--blue); color: white; border: none; padding: 12px 28px; font-family: inherit; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+  .btn-blue:hover { background: var(--blue-dark); }
+
+  /* PILLARS */
+  .get { background: var(--off-white); }
+  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 52px; }
+  .pillar-card { background: white; padding: 36px 28px; border-top: 3px solid var(--gray-mid); transition: border-color 0.3s, box-shadow 0.3s; }
+  .pillar-card:hover { border-top-color: var(--blue); box-shadow: 0 8px 32px rgba(15,30,60,0.1); }
+  .pillar-num { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; color: var(--blue); text-transform: uppercase; margin-bottom: 20px; }
+  .pillar-icon-wrap { width: 48px; height: 48px; background: var(--blue-light); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 1.3rem; }
+  .pillar-name { font-size: 1.05rem; font-weight: 700; color: var(--dark-text); margin-bottom: 8px; }
+  .pillar-outcome { font-size: 0.7rem; color: var(--blue); font-weight: 600; letter-spacing: 0.04em; margin-bottom: 14px; padding: 4px 10px; background: var(--blue-light); display: inline-block; }
+  .pillar-desc { font-size: 0.84rem; color: var(--gray-text); line-height: 1.75; margin-bottom: 18px; }
+  .pillar-feats { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .pillar-feats li { font-size: 0.8rem; color: var(--body-text); display: flex; gap: 8px; align-items: flex-start; line-height: 1.55; }
+  .pillar-feats li::before { content: '✓'; color: var(--success); font-weight: 700; flex-shrink: 0; font-size: 0.75rem; margin-top: 1px; }
+
+  /* COMPARISON */
+  .compare { background: white; }
+  .compare-header { text-align: center; margin-bottom: 52px; }
+  .compare-header .section-desc { margin: 0 auto; }
+  .compare-wrap { max-width: 860px; margin: 0 auto; }
+  table.compare-tbl { width: 100%; border-collapse: collapse; }
+  .compare-tbl thead th { padding: 16px 24px; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 2px solid var(--gray-mid); }
+  .compare-tbl thead th:first-child { text-align: left; color: var(--gray-text); }
+  .compare-tbl thead th:nth-child(2) { text-align: center; color: var(--gray-text); }
+  .compare-tbl thead th:nth-child(3) { text-align: center; color: var(--blue); background: var(--blue-light); border-bottom: 2px solid var(--blue); }
+  .compare-tbl tbody tr:hover { background: var(--off-white); }
+  .compare-tbl tbody td { padding: 14px 24px; font-size: 0.87rem; border-bottom: 1px solid var(--gray-mid); }
+  .compare-tbl tbody td:first-child { color: var(--dark-text); font-weight: 500; }
+  .compare-tbl tbody td:nth-child(2) { text-align: center; color: var(--gray-text); }
+  .compare-tbl tbody td:nth-child(3) { text-align: center; background: rgba(239,244,255,0.5); border-left: 1px solid var(--blue-pill); border-right: 1px solid var(--blue-pill); color: var(--dark-text); font-weight: 500; }
+  .compare-tbl tbody tr:last-child td:nth-child(3) { border-bottom: 2px solid var(--blue); }
+  .chk { color: var(--success); }
+  .x { color: var(--danger); opacity: 0.5; }
+  .compare-total { margin-top: 28px; text-align: center; padding: 28px; background: var(--navy); }
+  .compare-total p { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-bottom: 6px; }
+  .compare-total strong { font-size: 1.2rem; font-weight: 800; color: white; }
+  .compare-total .btn-primary { margin-top: 20px; }
+
+  /* FIT */
+  .fit { background: var(--off-white); }
+  .fit-header { text-align: center; margin-bottom: 52px; }
+  .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; max-width: 880px; margin: 0 auto; }
+  .fit-panel { padding: 44px 40px; background: white; }
+  .fit-panel.not-for { border-top: 3px solid var(--danger); }
+  .fit-panel.built-for { border-top: 3px solid var(--success); }
+  .fit-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 28px; }
+  .fit-label.not { color: var(--danger); }
+  .fit-label.yes { color: var(--success); }
+  .fit-item { padding: 12px 0; border-bottom: 1px solid var(--gray-mid); font-size: 0.88rem; color: var(--body-text); display: flex; gap: 10px; align-items: flex-start; line-height: 1.55; }
+  .fit-item:last-child { border-bottom: none; }
+  .fit-x { color: var(--danger); flex-shrink: 0; font-weight: 700; }
+  .fit-c { color: var(--success); flex-shrink: 0; font-weight: 700; }
+
+  /* FAQ */
+  .faq { background: white; }
+  .faq-header { text-align: center; margin-bottom: 52px; }
+  .faq-wrap { max-width: 720px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--gray-mid); }
+  .faq-q { width: 100%; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 22px 0; text-align: left; font-family: inherit; font-size: 0.95rem; font-weight: 600; color: var(--dark-text); transition: color 0.2s; }
+  .faq-q:hover { color: var(--blue); }
+  .faq-icon { width: 28px; height: 28px; border: 1px solid var(--gray-mid); background: var(--gray-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--blue); font-size: 1.1rem; transition: transform 0.3s, background 0.2s; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--blue-light); }
+  .faq-a { max-height: 0; overflow: hidden; font-size: 0.88rem; color: var(--gray-text); line-height: 1.8; transition: max-height 0.4s ease, padding 0.3s; }
+  .faq-item.open .faq-a { max-height: 200px; padding-bottom: 22px; }
+
+  /* FINAL CTA */
+  .cta-final { background: var(--off-white); }
+  .cta-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+  .cta-inner p { color: var(--gray-text); margin-bottom: 32px; line-height: 1.8; }
+  .cta-inner .btn-primary { padding: 15px 44px; font-size: 0.88rem; }
+  .cta-note { margin-top: 18px; font-size: 0.75rem; color: #94A3B8; }
+
+  /* FOOTER */
+  footer { background: var(--navy); padding: 40px 60px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .footer-logo { display: flex; align-items: center; gap: 10px; }
+  .footer-logo-box { background: var(--blue); color: white; font-weight: 800; font-size: 0.72rem; padding: 3px 7px; }
+  .footer-logo-text { color: rgba(255,255,255,0.6); font-size: 0.82rem; }
+  footer p { color: rgba(255,255,255,0.3); font-size: 0.74rem; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  .fade { opacity:0; animation: fadeUp 0.7s ease forwards; }
+  .d1{animation-delay:0.1s} .d2{animation-delay:0.2s} .d3{animation-delay:0.3s} .d4{animation-delay:0.45s}
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .section { padding: 56px 24px; }
+    .hero { padding: 56px 24px 64px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-card { display: none; }
+    .why-grid, .fit-grid { grid-template-columns: 1fr; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    footer { padding: 28px 24px; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-box">AFG</div>
+    <div class="nav-logo-text">AltFunds Global</div>
+  </div>
+  <div class="nav-links">
+    <a href="#">Solutions</a>
+    <a href="#">Events</a>
+    <a href="#">Membership</a>
+    <a href="#">Education</a>
+    <a href="#">About Us</a>
+    <a href="#">Shop</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-nav-ghost">Dashboard</button>
+    <button class="btn-nav-solid">Book a Call</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge fade d1">
+        <span class="hero-badge-dot"></span>
+        AFG Elite Membership
+      </div>
+      <h1 class="fade d2">The Legacy <span class="accent">Architect</span> Membership™</h1>
+      <p class="hero-sub fade d3">Access the knowledge, relationships, and tools that dramatically increase your chances of getting real capital approved.</p>
+      <div class="hero-cta-row fade d4">
+        <button class="btn-primary">Become a Member</button>
+        <button class="btn-outline">See What's Inside ↓</button>
+      </div>
+      <div class="hero-trust fade d4">
+        <div class="hero-trust-item">✓ Accredited Members Only</div>
+        <div class="hero-trust-item">✓ Limited Intake</div>
+        <div class="hero-trust-item">✓ Global Capital Network</div>
+      </div>
+    </div>
+    <div class="hero-card fade d3">
+      <div class="hero-card-title">Membership at a Glance</div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100K+ CHF</div>
+        <div class="hero-stat-label">Combined value included in membership</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1-on-1</div>
+        <div class="hero-stat-label">Direct access to Taimour & the AFG team</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">5 Pillars</div>
+        <div class="hero-stat-label">Capital → Execution → Corridors → Intelligence → Access</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1 Member</div>
+        <div class="hero-stat-label">At a time — genuinely limited intake</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY THIS EXISTS -->
+<section class="section why">
+  <div class="section-inner">
+    <span class="section-tag">Why This Exists</span>
+    <h2 class="section-title">You've done everything right.<br>So <span class="accent">why no deal?</span></h2>
+    <div class="why-grid">
+      <div>
+        <div class="why-img-placeholder">
+          <span>🏢</span>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.95rem;line-height:1.85;margin-bottom:20px;color:var(--body-text)">You've been told your project is strong. The numbers work. The vision is compelling. Then the deal stalls. Goes cold. Gatekeeper becomes the enemy.</p>
+        <p style="font-size:0.95rem;line-height:1.85;margin-bottom:28px;color:var(--body-text)">The real questions that drive capital decisions are ones most people never get answers to:</p>
+        <div class="why-q-title">The questions that matter most</div>
+        <ul class="why-q-list">
+          <li>Why do lenders keep saying no?</li>
+          <li>Why do decision-makers not close?</li>
+          <li>How do I actually get my deal funded?</li>
+        </ul>
+        <div class="why-answer">
+          <p>The AFG Legacy Architect Membership was designed to break that cycle. Every element was built to help you graduate from <strong>"almost funded"</strong> to capital secured.</p>
+        </div>
+        <button class="btn-blue">Upgrade to Elite →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="section get">
+  <div class="section-inner">
+    <span class="section-tag">What You Get Inside</span>
+    <h2 class="section-title">Five Pillars of <span class="accent">Capital Advantage</span></h2>
+    <p class="section-desc">Every element engineered specifically to move your deal from "almost" to approved.</p>
+    <div class="pillars-grid">
+
+      <div class="pillar-card">
+        <div class="pillar-num">Pillar 01</div>
+        <div class="pillar-icon-wrap">🎯</div>
+        <div class="pillar-name">Capital Clarity</div>
+        <div class="pillar-outcome">Outcome: Position yourself for approval</div>
+        <p class="pillar-desc">Understand exactly how capital decisions are made and restructure your entire approach before you pick up the phone.</p>
+        <ul class="pillar-feats">
+          <li>1:1 Capital Identity Blueprint</li>
+          <li>Monthly Strategy Calls with deal-shift markers</li>
+          <li>Three Full Days with Taimour — private intensive</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-num">Pillar 02</div>
+        <div class="pillar-icon-wrap">⚡</div>
+        <div class="pillar-name">Execution Power</div>
+        <div class="pillar-outcome">Outcome: Remove every deal blocker</div>
+        <p class="pillar-desc">The playbooks, templates, and authorization tools that actually clear deals through compliance, verification, and logistics.</p>
+        <ul class="pillar-feats">
+          <li>PPT Onboarding Playbooks — step by step</li>
+          <li>SBLC Monetization Guides & RWA Templates</li>
+          <li>Wire Templates to clear International Filters</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-num">Pillar 03</div>
+        <div class="pillar-icon-wrap">🌐</div>
+        <div class="pillar-name">Private Corridors</div>
+        <div class="pillar-outcome">Outcome: Get in front of real capital</div>
+        <p class="pillar-desc">Curated intelligence and verified introductions to people who actually deploy capital — not middlemen.</p>
+        <ul class="pillar-feats">
+          <li>Global Investor Intelligence — verified FOs, FIs, VCs</li>
+          <li>Family Office & Credit Enhancement Intros</li>
+          <li>Commercial Paper Master Caddy — closings platform</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-num">Pillar 04</div>
+        <div class="pillar-icon-wrap">📊</div>
+        <div class="pillar-name">Deal Intelligence</div>
+        <div class="pillar-outcome">Outcome: Know what kills deals</div>
+        <p class="pillar-desc">The internal frameworks capital desks use — now available to you — so you can anticipate every objection before it's raised.</p>
+        <ul class="pillar-feats">
+          <li>High-Value Training — DFY Options included</li>
+          <li>Fit frameworks used by real capital desks</li>
+          <li>Events at member pricing — not exit cost</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-num">Pillar 05</div>
+        <div class="pillar-icon-wrap">🔑</div>
+        <div class="pillar-name">Elite Access</div>
+        <div class="pillar-outcome">Outcome: Stand where capital moves</div>
+        <p class="pillar-desc">Not just what to do — but the rooms where it happens, and the people who make it happen.</p>
+        <ul class="pillar-feats">
+          <li>Member-only capital source events</li>
+          <li>Priority deal review from the AFG team</li>
+          <li>Accredited network — not LinkedIn noise</li>
+        </ul>
+      </div>
+
+      <div class="pillar-card" style="background:var(--navy);border-top-color:var(--blue);display:flex;flex-direction:column;justify-content:flex-end;gap:0">
+        <div>
+          <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#60A5FA;margin-bottom:14px">Ready to Start?</div>
+          <p style="font-size:1.2rem;font-weight:700;color:white;line-height:1.35;margin-bottom:10px">"Almost funded" ends here.</p>
+          <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:28px">Every element of this membership was built to get you from almost to approved.</p>
+          <button class="btn-primary" style="width:100%">Apply for Membership</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="section compare">
+  <div class="section-inner">
+    <div class="compare-header">
+      <span class="section-tag">Free vs Elite</span>
+      <h2 class="section-title">See the <span class="accent">Difference</span></h2>
+      <p class="section-desc">A clear side-by-side of where the Legacy Architect tier stands apart from the free tier.</p>
+    </div>
+    <div class="compare-wrap">
+      <table class="compare-tbl">
+        <thead>
+          <tr>
+            <th style="text-align:left">Feature</th>
+            <th>Free</th>
+            <th>Legacy Architect</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Capital Strategy</td><td><span class="x">✕</span> None</td><td><span class="chk">✓</span> Full Capital Blueprint</td></tr>
+          <tr><td>1:1 Advisor Access</td><td><span class="x">✕</span> Not included</td><td><span class="chk">✓</span> On-Call Access</td></tr>
+          <tr><td>Deal Tools</td><td><span class="x">✕</span> Pay-per-item</td><td><span class="chk">✓</span> All Included</td></tr>
+          <tr><td>Capital Access</td><td><span class="x">✕</span> USD 3,000 cap</td><td><span class="chk">✓</span> Unlimited</td></tr>
+          <tr><td>Databases</td><td><span class="x">✕</span> USD 2,500 each</td><td><span class="chk">✓</span> Included</td></tr>
+          <tr><td>High-Value Training</td><td><span class="x">✕</span> None</td><td><span class="chk">✓</span> From Your Power Internship</td></tr>
+          <tr><td>Private Events</td><td><span class="x">✕</span> Exit Price</td><td><span class="chk">✓</span> 20% Off + VIP</td></tr>
+        </tbody>
+      </table>
+      <div class="compare-total">
+        <p>Total value if purchased individually</p>
+        <strong>Over 100,000 CHF — included in your membership</strong>
+        <br>
+        <button class="btn-primary">Become a Member</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="section fit">
+  <div class="section-inner">
+    <div class="fit-header">
+      <span class="section-tag">Who This Is For and Not For</span>
+      <h2 class="section-title">Built for the <span class="accent">Right People</span></h2>
+    </div>
+    <div class="fit-grid">
+      <div class="fit-panel not-for">
+        <div class="fit-label not">✕ &nbsp; Not For</div>
+        <div class="fit-item"><span class="fit-x">✕</span> Curious browsers with no active deal</div>
+        <div class="fit-item"><span class="fit-x">✕</span> People hunting the "one everything" program</div>
+        <div class="fit-item"><span class="fit-x">✕</span> LinkedIn hunters looking for shortcuts</div>
+        <div class="fit-item"><span class="fit-x">✕</span> Anyone unwilling to commit and do the work</div>
+      </div>
+      <div class="fit-panel built-for">
+        <div class="fit-label yes">✓ &nbsp; Built For</div>
+        <div class="fit-item"><span class="fit-c">✓</span> Accredited investors with real projects seeking capital</div>
+        <div class="fit-item"><span class="fit-c">✓</span> Professionals who want structure, not speculation</div>
+        <div class="fit-item"><span class="fit-c">✓</span> Operators ready to build capital legacies</div>
+        <div class="fit-item"><span class="fit-c">✓</span> People who want to close deals — not just learn about them</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq">
+  <div class="section-inner">
+    <div class="faq-header">
+      <span class="section-tag">Straight Answers</span>
+      <h2 class="section-title">Common Questions</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item open">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What makes this different from other memberships?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">We don't sell guarantees. We sell access — the contacts, intelligence, and tools required to actually close them. No other membership provides curated access to verified capital sources alongside the exact frameworks those sources use to evaluate deals.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can I find this on my own?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Possibly — after years of relationship building, expensive introductions, and trial-and-error with real capital at stake. This membership compresses that timeline significantly. The groundwork is already done; your access starts on day one.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do you guarantee funding?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">No — and if anyone claims they can guarantee capital, leave immediately. We guarantee you'll have every tool, contact, and framework to give your deal the strongest possible chance. Results depend on your project quality and execution.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section cta-final">
+  <div class="section-inner">
+    <div class="cta-inner">
+      <span class="section-tag">Membership Is Limited</span>
+      <h2 class="section-title">Stop being <span class="accent">"almost funded."</span></h2>
+      <p>If you're ready to stop losing "almost funded" — and start getting capital approved — this is where it begins. One member at a time.</p>
+      <button class="btn-primary">Apply for Legacy Architect Membership</button>
+      <p class="cta-note">Applications reviewed within 48 hours · Limited intake · One member at a time</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="footer-logo-box">AFG</div>
+    <div class="footer-logo-text">AltFunds Global</div>
+  </div>
+  <p>© 2024 AltFunds Global. Enterprise membership firm. Accredited investors only. All rights reserved.</p>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+</script>
+</body>
+</html>
